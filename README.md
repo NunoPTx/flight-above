@@ -20,7 +20,9 @@ Shows the closest aircraft flying over your location on a HUB75 64x32 LED matrix
 
 ## Setup
 
-Before flashing, edit these values at the top of `esp32.cpp`:
+### 1. Set the values
+
+Edit these values at the top of `esp32.cpp`:
 
 | Variable | Description |
 |---|---|
@@ -30,6 +32,22 @@ Before flashing, edit these values at the top of `esp32.cpp`:
 | `LAMIN` / `LAMAX` | South/North edges of the area |
 | `LOMIN` / `LOMAX` | West/East edges of the area |
 
+### 2. Connect the panel
+
+Wire the HUB75 panel to the ESP32 according to the [Pinout](#pinout) table.
+
+- Check `hub75-pinout` and `esp32-pinout` before connecting.
+- Join all grounds: panel, ESP32 and power supply.
+- Power the panel from its own 5 V supply (4+ A recommended). Do not power it from the ESP32 5V pin or USB source.
+
+### 3. Upload the code
+
+The nearest aircraft should appear within about 10s. If no aircraft is inside your search box, the panel will display "NO FLIGHTS".
+
+## API
+
+Data comes from the Flightradar24 feed, requested every 10s with the bounding area built from `LAMIN`, `LAMAX`, `LOMIN` and `LOMAX`.
+
 ## Search area
 
 ![Search area](area.png)
@@ -37,7 +55,7 @@ Before flashing, edit these values at the top of `esp32.cpp`:
 - **Green dots:** the corners of the search box (`LAMIN`, `LAMAX`, `LOMIN`, `LOMAX`). Only aircraft inside this box are considered.
 - **Red dot:** your home / desired tracking center (`HOME_LAT`, `HOME_LON`). The aircraft closest to this point is shown.
 
-## Wiring
+## Pinout
 
 | HUB75 pin | ESP32 GPIO |
 |---|---|
