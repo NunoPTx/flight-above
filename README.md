@@ -19,7 +19,7 @@ Shows the closest aircraft flying over your location on a HUB75 64x32 LED matrix
 
 ## Setup
 
-### 1. Set the values
+### 1. Set this values
 
 Edit these values at the top of `esp32.cpp`:
 
