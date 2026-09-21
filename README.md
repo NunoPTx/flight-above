@@ -20,7 +20,7 @@ Shows the closest aircraft flying over your location on a HUB75 64x32 LED matrix
 
 ## Setup
 
-Before flashing, edit these values at the top of `V-2.cpp`:
+Before flashing, edit these values at the top of `esp32.cpp`:
 
 | Variable | Description |
 |---|---|
