@@ -37,7 +37,7 @@ Wire the HUB75 panel to the ESP32 according to the [Pinout](#pinout) table.
 
 - Check `hub75-pinout` and `esp32-pinout` before connecting, they might vary by model.
 - Join all grounds: panel, ESP32 and power supply.
-- Power the panel from its own 5V supply (≥4A recommended). Do not power it from the ESP32 5V pin or USB source. The ESP32 can also be powered by the 5V supply.
+- Power the panel from its own 5V supply (≥4A recommended). Do not power it from the ESP32 5V pin or USB cable. The ESP32 can also be powered by the 5V supply.
 
 ### 3. Upload the code
 
