@@ -11,12 +11,11 @@ Shows the closest aircraft flying over your location on a HUB75 64x32 LED matrix
 
 ## What it shows
 
-- Airline name (from callsign)
+- Airline name or callsign
 - Aircraft model
 - Origin or destination airport
-- Climb/descent arrow
+- Climb/descent symbol
 - Speed (kts) and altitude (ft)
-- Live data from the Flightradar24 feed, refreshed every 10 s
 
 ## Setup
 
