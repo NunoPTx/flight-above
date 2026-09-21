@@ -27,7 +27,7 @@ Edit these values at the top of `esp32.cpp`:
 |---|---|
 | `WIFI_SSID` | Wi-Fi network name (**2.4 GHz only**) |
 | `WIFI_PASS` | Wi-Fi password |
-| `HOME_LAT` / `HOME_LON` | Your location (red dot), the center used to pick the nearest aircraft |
+| `HOME_LAT` / `HOME_LON` | Your location |
 | `LAMIN` / `LAMAX` | South/North edges of the area |
 | `LOMIN` / `LOMAX` | West/East edges of the area |
 
