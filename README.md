@@ -92,7 +92,7 @@ Data comes from the Flightradar24 feed, requested every 10 seconds within the bo
 |---|---|
 | SDA | 8 |
 | SCL | 9 |
-| VCC | 3.3V / 5V |
+| VCC | 3.3V |
 | GND | GND |
 
 ## Libraries
