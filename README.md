@@ -97,5 +97,5 @@ Data comes from the Flightradar24 feed, requested every 10 seconds within the bo
 ## Libraries
 
 - **For HUB75:** `ESP32-HUB75-MatrixPanel-I2S-DMA`
-- **For I2C OLED:** `Adafruit_GFX` and `Adafruit_SSD1306`
-- **Common:** `ArduinoJson`, `WiFiClientSecure`, `HTTPClient`
+- **For I2C OLED:** `Adafruit GFX Library` and `Adafruit SSD1306`
+- **Common:** `ArduinoJson`
