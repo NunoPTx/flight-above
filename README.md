@@ -1,6 +1,6 @@
 # flight-above
 
-Shows the closest aircraft flying over your location on an ESP32-driven display. Supports both **HUB75 64x32 LED matrices** and **I2C 128x32 OLED displays**.
+Shows the closest aircraft flying over your location on an ESP32-driven display. Supports both **HUB75 64x32 LED matrix** and **I2C 128x32 OLED display**.
 
 ## Content
 
