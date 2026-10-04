@@ -4,7 +4,7 @@
 #include <ArduinoJson.h>
 #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
 
-const char* WIFI_SSID = "YOUR_WIFI_NAME"; //DEFINE THIS (2.4Ghz ONLY)
+const char* WIFI_SSID = "YOUR_WIFI_NAME"; // DEFINE THIS (2.4Ghz ONLY)
 const char* WIFI_PASS = "YOUR_WIFI_PASSWORD"; // DEFINE THIS (2.4Ghz ONLY)
 
 const float HOME_LAT = 0.0; // DEFINE THIS
@@ -87,11 +87,12 @@ String getAirlineName(const String& callsign, bool isMil) {
 
 FlightData fetchOverheadFlight() {
   FlightData flight;
-  if (WiFi.status() != WL_CONNECTED) return flight;
 
   WiFiClientSecure client;
   client.setInsecure();
+
   HTTPClient http;
+  http.useHTTP10(true);
   http.setTimeout(5000);
   String url = "https://data-cloud.flightradar24.com/zones/fcgi/feed.js?bounds=" +
                String(LAMAX, 4) + "," + String(LAMIN, 4) + "," +
@@ -233,16 +234,16 @@ void drawSmallText(const String& str, int x, int y, uint16_t color) {
 
 const int ARROW_X = 55 + MARGIN;
 
+void showMessage(const char* msg) {
+  display->clearScreen();
+  display->setTextColor(COLOR_WHITE);
+  display->setTextSize(1);
+  display->setCursor(2 + MARGIN, 12);
+  display->print(msg);
+}
+
 void renderFlightUI(const FlightData& flight) {
   display->clearScreen();
-
-  if (!flight.hasData) {
-    display->setTextColor(COLOR_WHITE);
-    display->setTextSize(1);
-    display->setCursor(2 + MARGIN, 12);
-    display->print("NO FLIGHTS");
-    return;
-  }
 
   int textStartX = MARGIN;
   if (flight.isMilitary) {
@@ -263,7 +264,7 @@ void renderFlightUI(const FlightData& flight) {
   display->setCursor(MARGIN, 10 + MARGIN);
   display->print(flight.model.substring(0, 5));
 
-  display->setCursor( 42 + MARGIN, 10 + MARGIN);
+  display->setCursor(42 + MARGIN, 10 + MARGIN);
   display->print(flight.airportCode.substring(0, 3));
 
   display->drawFastHLine(MARGIN, 19 + MARGIN, RES_X - (2 * MARGIN), COLOR_WHITE);
@@ -273,18 +274,35 @@ void renderFlightUI(const FlightData& flight) {
 }
 
 void setup() {
-  Serial.begin(115200);
   setupMatrix();
 
-  WiFi.begin(WIFI_SSID, WIFI_PASS);
-  display->setTextColor(COLOR_WHITE);
-  display->setTextSize(1);
-  display->setCursor(2, 12);
-  display->print("CONNECTING");
+  showMessage("CONNECTING...");
 
-  while (WiFi.status() != WL_CONNECTED) {
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(WIFI_SSID, WIFI_PASS);
+  for (int i = 0; i < 30 && WiFi.status() != WL_CONNECTED; i++) {
     delay(500);
+  }
+
+  if (WiFi.status() != WL_CONNECTED) {
+    showMessage("WIFI FAILED");
   }
 }
 
-void loop()
+void loop() {
+  if (WiFi.status() != WL_CONNECTED) {
+    WiFi.reconnect();
+    showMessage("NO WIFI");
+    delay(5000);
+    return;
+  }
+
+  FlightData currentFlight = fetchOverheadFlight();
+  if (currentFlight.hasData) {
+    renderFlightUI(currentFlight);
+  } else {
+    showMessage("NO FLIGHTS");
+  }
+
+  delay(REFRESH_RATE);
+}
