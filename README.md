@@ -47,6 +47,7 @@ Wire the HUB75 panel to the ESP32 according to the [HUB75 Pinout](#hub75-pinout)
 
 #### Option B: I2C OLED Display
 Wire the OLED screen according to the [I2C Pinout](#i2c-pinout) table:
+- Check your display pinout and esp32 pinout before connecting; pin mappings can vary by board model.
 - Defaults to GPIO 8 (`SDA`) and GPIO 9 (`SCL`). Change these in `esp32-I2C.cpp` if using different hardware pins.
 
 ### 4. Upload the code
