@@ -1,12 +1,12 @@
 # flight-above
 
-Shows the closest aircraft flying over your location on a HUB75 64x32 LED matrix, driven by an ESP32.
+Shows the closest aircraft flying over your location on an ESP32-driven display. Supports both **HUB75 64x32 LED matrices** and **I2C 128x32 OLED displays**.
 
 ## Content
 
-- `esp32.cpp`: main firmware
+- `esp32-HUB75.cpp`: HUB75 software
+- `esp32-I2C.cpp`: I2C software
 - `area.png`: example search area
-- `hub75-pinout`: pinout for the HUB75 model used
 - `esp32-pinout`: pinout for the ESP32 model used
 
 ## What it shows
@@ -19,33 +19,44 @@ Shows the closest aircraft flying over your location on a HUB75 64x32 LED matrix
 
 ## Setup
 
-### 1. Set this values
+### 1. Choose your firmware
 
-Edit these values at the top of `esp32.cpp`:
+Select the `.cpp` file corresponding to your display module:
+- Use `esp32-HUB75.cpp` if you are using a 64x32 RGB LED matrix.
+- Use `esp32-I2C.cpp` if you are using an I2C 128x32 OLED screen.
+
+### 2. Set these values
+
+Edit these values at the top of your chosen `.cpp` file:
 
 | Variable | Description |
 |---|---|
 | `WIFI_SSID` | Wi-Fi network name (**2.4 GHz only**) |
 | `WIFI_PASS` | Wi-Fi password |
-| `HOME_LAT` / `HOME_LON` | Your location |
-| `LAMIN` / `LAMAX` | South/North edges of the area |
-| `LOMIN` / `LOMAX` | West/East edges of the area |
+| `HOME_LAT` / `HOME_LON` | Your location coordinates |
+| `LAMIN` / `LAMAX` | South/North edges of the bounding area |
+| `LOMIN` / `LOMAX` | West/East edges of the bounding area |
 
-### 2. Connect the panel
+### 3. Connect the display
 
-Wire the HUB75 panel to the ESP32 according to the [Pinout](#pinout) table.
+#### Option A: HUB75 Panel
+Wire the HUB75 panel to the ESP32 according to the [HUB75 Pinout](#hub75-pinout) table.
+- Check `hub75-pinout` and `esp32-pinout` before connecting; pin mappings can vary by board model.
+- Join all grounds: panel, ESP32, and external power supply.
+- Power the panel from its own dedicated 5V supply (≥4A recommended). Do not power it directly from the ESP32 5V pin or USB port.
 
-- Check `hub75-pinout` and `esp32-pinout` before connecting, they might vary by model.
-- Join all grounds: panel, ESP32 and power supply.
-- Power the panel from its own 5V supply (≥4A recommended). Do not power it from the ESP32 5V pin or USB cable. The ESP32 can also be powered by the 5V supply.
+#### Option B: I2C OLED Display
+Wire the OLED screen according to the [I2C Pinout](#i2c-pinout) table:
+- Defaults to GPIO 8 (`SDA`) and GPIO 9 (`SCL`). Change these in `esp32-I2C.cpp` if using different hardware pins.
+- Set the correct I2C address (`OLED_I2C_ADDR`, default `0x3C`).
 
-### 3. Upload the code
+### 4. Upload the code
 
-The nearest aircraft should appear within about 10s. If no aircraft is inside your search box, the panel will display "NO FLIGHTS".
+Upload the file to your ESP32. The nearest aircraft should appear within ~10 seconds. If no aircraft are found within your bounding area, the screen will display "NO FLIGHTS".
 
 ## API
 
-Data comes from the Flightradar24 feed, requested every 10s with the bounding area built from `LAMIN`, `LAMAX`, `LOMIN` and `LOMAX`.
+Data comes from the Flightradar24 feed, requested every 10 seconds within the bounding area defined by `LAMIN`, `LAMAX`, `LOMIN`, and `LOMAX`.
 
 ## Search area
 
@@ -54,7 +65,9 @@ Data comes from the Flightradar24 feed, requested every 10s with the bounding ar
 - **Green dots:** the corners of the search box (`LAMIN`, `LAMAX`, `LOMIN`, `LOMAX`). Only aircraft inside this box are considered.
 - **Red dot:** your home / desired tracking center (`HOME_LAT`, `HOME_LON`). The aircraft closest to this point is shown.
 
-## Pinout
+## Pinouts
+
+### HUB75 Pinout
 
 | HUB75 pin | ESP32 GPIO |
 |---|---|
@@ -73,7 +86,17 @@ Data comes from the Flightradar24 feed, requested every 10s with the bounding ar
 | CLK | 16 |
 | GND | GND |
 
+### I2C Pinout
+
+| OLED pin | ESP32 GPIO |
+|---|---|
+| SDA | 8 |
+| SCL | 9 |
+| VCC | 3.3V / 5V |
+| GND | GND |
+
 ## Libraries
 
-- ESP32-HUB75-MatrixPanel-I2S-DMA
-- ArduinoJson
+- **For HUB75:** `ESP32-HUB75-MatrixPanel-I2S-DMA`
+- **For I2C OLED:** `Adafruit_GFX` and `Adafruit_SSD1306`
+- **Common:** `ArduinoJson`, `WiFiClientSecure`, `HTTPClient`
