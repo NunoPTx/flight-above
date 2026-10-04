@@ -41,14 +41,13 @@ Edit these values at the top of your chosen `.cpp` file:
 
 #### Option A: HUB75 Panel
 Wire the HUB75 panel to the ESP32 according to the [HUB75 Pinout](#hub75-pinout) table.
-- Check `hub75-pinout` and `esp32-pinout` before connecting; pin mappings can vary by board model.
+- Check your display pinout and esp32 pinout before connecting; pin mappings can vary by board model.
 - Join all grounds: panel, ESP32, and external power supply.
 - Power the panel from its own dedicated 5V supply (≥4A recommended). Do not power it directly from the ESP32 5V pin or USB port.
 
 #### Option B: I2C OLED Display
 Wire the OLED screen according to the [I2C Pinout](#i2c-pinout) table:
 - Defaults to GPIO 8 (`SDA`) and GPIO 9 (`SCL`). Change these in `esp32-I2C.cpp` if using different hardware pins.
-- Set the correct I2C address (`OLED_I2C_ADDR`, default `0x3C`).
 
 ### 4. Upload the code
 
