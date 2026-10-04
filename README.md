@@ -7,7 +7,6 @@ Shows the closest aircraft flying over your location on an ESP32-driven display.
 - `esp32-HUB75.cpp`: HUB75 software
 - `esp32-I2C.cpp`: I2C software
 - `area.png`: example search area
-- `esp32-pinout`: pinout for the ESP32 model used
 
 ## What it shows
 
