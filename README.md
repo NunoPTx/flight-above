@@ -19,7 +19,7 @@ Shows the closest aircraft flying over your location on an ESP32-driven display.
 
 ## Setup
 
-### 1. Choose your firmware
+### 1. Choose your software
 
 Select the `.cpp` file corresponding to your display module:
 - Use `esp32-HUB75.cpp` if you are using a HUB75 64x32 RGB LED matrix.
