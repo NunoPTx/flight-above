@@ -6,8 +6,8 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-const char* WIFI_SSID = "NULL"; // DEFINE THIS (2.4Ghz ONLY)
-const char* WIFI_PASS = "NULL"; // DEFINE THIS (2.4Ghz ONLY)
+const char* WIFI_SSID = "WIFI_SSID"; // DEFINE THIS (2.4Ghz ONLY)
+const char* WIFI_PASS = "WIFI_PASS"; // DEFINE THIS (2.4Ghz ONLY)
 
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 32
@@ -20,8 +20,8 @@ const char* WIFI_PASS = "NULL"; // DEFINE THIS (2.4Ghz ONLY)
 
 #define REFRESH_MS 10000
 
-const float HOME_LAT = NULL;
-const float HOME_LON = -NULL;
+const float HOME_LAT = NULL; // DEFINE THIS
+const float HOME_LON = -NULL; // DEFINE THIS
 
 const float LAMIN = NULL; // DEFINE THIS
 const float LAMAX = NULL; // DEFINE THIS
