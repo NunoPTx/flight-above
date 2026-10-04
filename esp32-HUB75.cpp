@@ -4,11 +4,11 @@
 #include <ArduinoJson.h>
 #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h>
 
-const char* WIFI_SSID = "YOUR_WIFI_NAME"; // DEFINE THIS (2.4Ghz ONLY)
-const char* WIFI_PASS = "YOUR_WIFI_PASSWORD"; // DEFINE THIS (2.4Ghz ONLY)
+const char* WIFI_SSID = "WIFI_SSID"; // DEFINE THIS (2.4Ghz ONLY)
+const char* WIFI_PASS = "WIFI_PASS"; // DEFINE THIS (2.4Ghz ONLY)
 
-const float HOME_LAT = 0.0; // DEFINE THIS
-const float HOME_LON = 0.0; // DEFINE THIS
+const float HOME_LAT = NULL; // DEFINE THIS
+const float HOME_LON = -NULL; // DEFINE THIS
 
 #define RES_X 64
 #define RES_Y 32
@@ -18,10 +18,10 @@ MatrixPanel_I2S_DMA *display = nullptr;
 uint16_t COLOR_WHITE;
 uint16_t COLOR_RED;
 
-const float LAMIN = 0.0;   // DEFINE THIS
-const float LAMAX = 0.0;   // DEFINE THIS
-const float LOMIN = 0.0;   // DEFINE THIS
-const float LOMAX = 0.0;   // DEFINE THIS
+const float LAMIN = NULL;   // DEFINE THIS
+const float LAMAX = NULL;   // DEFINE THIS
+const float LOMIN = -NULL;   // DEFINE THIS
+const float LOMAX = -NULL;   // DEFINE THIS
 
 const int REFRESH_RATE = 10000; 
 
