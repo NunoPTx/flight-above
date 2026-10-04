@@ -22,7 +22,7 @@ Shows the closest aircraft flying over your location on an ESP32-driven display.
 ### 1. Choose your firmware
 
 Select the `.cpp` file corresponding to your display module:
-- Use `esp32-HUB75.cpp` if you are using a 64x32 RGB LED matrix.
+- Use `esp32-HUB75.cpp` if you are using a HUB75 64x32 RGB LED matrix.
 - Use `esp32-I2C.cpp` if you are using an I2C 128x32 OLED screen.
 
 ### 2. Set these values
