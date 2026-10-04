@@ -15,9 +15,7 @@ const char* WIFI_PASS = "WIFI_PASS"; // DEFINE THIS (2.4Ghz ONLY)
 #define OLED_I2C_ADDR 0x3C
 #define I2C_SDA 8
 #define I2C_SCL 9
-
 #define MARGIN 2
-
 #define REFRESH_MS 10000
 
 const float HOME_LAT = NULL; // DEFINE THIS
