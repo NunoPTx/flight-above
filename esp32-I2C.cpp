@@ -188,11 +188,6 @@ void printRight(const String& s, int y) {
   display.print(s);
 }
 
-// Same layout as the original:
-//  [airline ..............] [arrow]
-//  [model ..............] [airport]
-//  ------------------------------
-//  [speed ................] [alt]
 void renderFlightUI(const FlightData& flight) {
   display.clearDisplay();
   display.setTextSize(1);
